@@ -1,0 +1,141 @@
+Persona/cliente
+
+IdCliente
+NombrePersona (Nombre y apellido)
+RTNCliente
+
+
+CREATE TABLE [dbo].[Persona](
+	[IdPersona] [int] NOT NULL,
+	[Nombre] [varchar](50) NOT NULL,
+	[Apellido] [varchar](50) NOT NULL,
+	[Sexo] [char](2) NOT NULL,
+	[IDE] [varchar](50) NOT NULL,
+	[Direccion] [varchar](50) NOT NULL,
+	[Telefono] [varchar](50) NOT NULL,
+	[Edad] [int] NOT NULL,
+ CONSTRAINT [PK_Persona] PRIMARY KEY CLUSTERED 
+
+ CREATE TABLE [dbo].[Cliente](
+	[IdCliente] [int] NOT NULL,
+	[Nombre] [varchar](50) NOT NULL,
+	[RTN] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Cliente] PRIMARY KEY CLUSTERED 
+
+
+1)
+ create table dw_persona
+ 	idCliente int not null,
+ 	NombrePersona vaarchar(50) not null,
+ 	rtnCliente varchar(20)
+ constraint pk_idcliente primary key clustered
+
+ ----------------------------------------------
+ Persona/Empleado/Cargo/Planilla
+
+ CREATE TABLE [dbo].[Planilla](
+	[IdPlanilla] [int] NOT NULL,
+	[IdEmpleado] [int] NOT NULL,
+	[Sueldo] [decimal](10, 2) NOT NULL,
+	[Adelantos] [decimal](10, 2) NOT NULL,
+	[Deduccioes] [decimal](10, 2) NOT NULL,
+	[Total] [decimal](10, 2) NOT NULL,
+ CONSTRAINT [PK_Planilla] PRIMARY KEY CLUSTERED 
+
+CREATE TABLE [dbo].[Empleados](
+	[IdEmpleado] [int] NOT NULL,
+	[IdPersona] [int] NOT NULL,
+	[IdCargo] [int] NOT NULL,
+	[Descuento_Empleado] [int] NOT NULL,
+	[Fecha_Inicio] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Empleados] PRIMARY KEY CLUSTERED 
+
+ CREATE TABLE [dbo].[Cargo](
+	[IdCargo] [int] NOT NULL,
+	[Descripcion] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Cargo] PRIMARY KEY CLUSTERED 
+
+ NombreEmpleado
+ IdEmpleado
+ IdCargo
+ DescripcionCargo
+
+
+2)
+ CREATE TABLE dw_empleado
+ 	idEmpleado int not null,
+ 	nombreEmpleado varchar (50) not null,
+ 	idCargo int not null,
+ 	descripcionCargo varchar(50),
+ 	fechaInicio varchar(50),
+ 	sueldo decimal (10,2) not null, 
+ 	deducciones decimal (10,2) not null
+ constraint pk_idempleado primary key clustered
+
+
+ -----------------------------------------------
+ Detalle_orden/factura/inf_factura/producto
+
+CREATE TABLE [dbo].[Detalle_Orden](
+	[IdDetalleOrden] [int] NOT NULL,
+	[IdProducto] [int] NOT NULL,
+ CONSTRAINT [PK_Detalle_Orden] PRIMARY KEY CLUSTERED 
+
+CREATE TABLE [dbo].[Factura](
+	[IdFactura] [int] NOT NULL,
+	[IdInformacionFactura] [int] NOT NULL,
+	[IdOrden] [int] NOT NULL,
+	[IdTipoPago] [int] NOT NULL,
+	[IdDescuento] [int] NOT NULL,
+	[IdCliente] [int] NOT NULL,
+	[ISV] [decimal](10, 2) NOT NULL,
+	[Total] [decimal](10, 2) NULL,
+ CONSTRAINT [PK_Factura] PRIMARY KEY CLUSTERED 
+
+ CREATE TABLE [dbo].[Informacion_Factura](
+	[IdInformacionFactura] [int] NOT NULL,
+	[RTN] [varchar](50) NOT NULL,
+	[nFactura] [varchar](50) NOT NULL,
+	[CAI] [varchar](50) NOT NULL,
+	[Correlativo] [int] NOT NULL,
+	[Fecha_Limite] [date] NOT NULL,
+	[Rango_Minimo] [int] NOT NULL,
+	[Rango_Maximo] [int] NOT NULL,
+ CONSTRAINT [PK_Informacion_Factura] PRIMARY KEY CLUSTERED
+
+ CREATE TABLE [dbo].[Producto](
+	[IdProducto] [int] NOT NULL,
+	[Nombre] [varchar](50) NOT NULL,
+	[Precio] [decimal](10, 2) NOT NULL,
+ CONSTRAINT [PK_Producto] PRIMARY KEY CLUSTERED 
+
+ idProducto
+ nombre
+ idFactura
+ nFactura
+ cai
+ fecha
+ isv
+ total
+
+
+3)
+ create table dw_factura
+ 	idProducto int not null,
+ 	nombreProducto varchar(50) not null,
+ 	precio decimal(10,2) not null,
+ 	idFactura int not null,
+ 	nFactura varchar(50) not null,
+ 	rtn varchar(50) not null,
+ 	fecha date not null,
+ 	isv decimal(10,2) not null,
+ 	total decimal(10,2),
+ 	constraint pk_idFactura primary key clustered
+
+
+------------------------------------------------
+
+
+
+
+
